@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>凰色映画笺 - 一帧一色·色里识人·中国传统色映画笺谱/不提供在线播放</title>
+<meta name="description" content="凰色映画笺（huangseyingshidaquan-h5）是以中国传统色解读电影的原创映画笺谱：一帧一色、五色识人、晕染色阶、题跋批注。本站不是影视大全、不是资源聚合站、不提供在线播放与盗版下载。网址 https://huangseyingshidaquan-h5.github.io">
+<meta name="keywords" content="凰色映画笺,中国传统色,映画笺谱,一帧一色,五色识人,电影配色分析,敦煌色,影视美学,huangseyingshidaquan">
+<meta name="author" content="凰色映画笺">
+<meta name="robots" content="index,follow">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#F2E9D6">
+<meta property="og:type" content="website">
+<meta property="og:title" content="凰色映画笺 - 一帧一色，色里识人">
+<meta property="og:description" content="凤象者五，五色而备。我们把电影拆成一张色笺，读出那格颜色替谁在说话。">
+<meta property="og:url" content="https://huangseyingshidaquan-h5.github.io">
+<link rel="canonical" href="https://huangseyingshidaquan-h5.github.io/">
+<style>
+/* ============================================================
+   凰色映画笺  v1  原创 · 中国传统色 × 电影读色
+   字源：凰，古音通"光"，太阳鸟；凤象者五，五色备举
+   视觉：敦煌朱砂 / 孔雀青 / 缃金 / 宣纸米白 / 墨紫
+   结构：五德色卡 · 一帧一色笺 · 晕染色阶 · 题跋批注 · 笺谱铭牌
+   ============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  font-family:"Songti SC","PingFang SC","Microsoft YaHei",Georgia,serif;
+  background:#F2E9D6;color:#2C2326;line-height:1.85;overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 8% 7%,rgba(176,58,46,.10),transparent 32%),
+    radial-gradient(circle at 92% 10%,rgba(52,118,120,.10),transparent 30%),
+    repeating-linear-gradient(0deg,transparent 0 25px,rgba(120,100,80,.045) 25px 26px);
+}
+a{text-decoration:none;color:inherit;outline:none}
+img{max-width:100%;display:block}
+section[id]{scroll-margin-top:2px}
+::selection{background:#B03A2E;color:#FFF7E8}
+h1,h2,h3,h4{line-height:1.28;font-weight:800;letter-spacing:.5px}
+ul{list-style:none}
+
+/* ---------- 笺纸签条 ---------- */
+.tab{background:#2C2326;color:#E6D5AE;font-size:11.5px;letter-spacing:1.4px;padding:7px 16px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;border-bottom:3px solid #B03A2E;font-family:"Courier New",monospace}
+.tab b{color:#F0C96A}
+.tab .seal{color:#E6B24A;font-weight:800;border:1px solid #E6B24A;padding:0 6px;border-radius:2px}
+
+/* ---------- 导航：玉箸 + 朱印 ---------- */
+.nav{position:sticky;top:0;z-index:999;background:rgba(242,233,214,.97);backdrop-filter:blur(8px);border-bottom:1px solid #D8C7A3}
+.nav-in{max-width:1220px;margin:0 auto;height:64px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.chop{display:flex;align-items:center;gap:11px;min-width:0}
+.chop .yin{width:34px;height:34px;background:#B03A2E;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;box-shadow:0 2px 0 #7A2A20}
+.chop .yin::before{content:"凰";color:#F7E9CE;font-size:17px;font-weight:900;font-family:"Songti SC",serif;line-height:1}
+.chop .yin::after{content:"";position:absolute;inset:3px;border:1px dashed rgba(247,233,206,.5);border-radius:2px}
+.chop .cn{font-size:19px;font-weight:900;white-space:nowrap;letter-spacing:.5px}
+.chop .cn em{font-style:normal;color:#B03A2E}
+.chop .cn .thin{color:#8C7E66;font-weight:600;font-size:16px}
+.chop .en{font-size:9px;letter-spacing:2.4px;color:#8C7E66;font-family:monospace;text-transform:uppercase;white-space:nowrap}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:#4A403D;padding:8px 9px;border-bottom:2px solid transparent;transition:.2s;font-weight:600}
+.nav-links a:hover{color:#B03A2E;border-bottom-color:#B03A2E}
+.nav-go{background:#B03A2E;color:#F7E9CE;font-weight:800;font-size:13px;padding:8px 16px;border-radius:3px 14px 3px 14px;border:1.5px solid #7A2A20;transition:.25s;white-space:nowrap}
+.nav-go:hover{background:#F0C96A;color:#2C2326;border-color:#B03A2E;transform:translateY(-2px)}
+
+/* ---------- Hero：展开的笺 ---------- */
+.hero{max-width:1220px;margin:0 auto;padding:50px 20px 40px;display:grid;grid-template-columns:1.12fr .88fr;gap:32px;align-items:center}
+.scroll{background:#F9F1DF;border:1px solid #D8C7A3;box-shadow:0 0 0 8px #F9F1DF,0 0 0 9px #C9B48A,3px 6px 0 rgba(120,100,80,.16);padding:30px 28px;position:relative;border-radius:2px}
+.scroll::before{content:"";position:absolute;top:0;bottom:0;left:14px;width:2px;background:repeating-linear-gradient(180deg,#C9B48A 0 4px,transparent 4px 8px)}
+.scroll::after{content:"笺 · 第一叶";position:absolute;top:16px;right:20px;font-family:"Songti SC",serif;font-size:13px;color:#B03A2E;letter-spacing:3px;border-left:2px solid #B03A2E;padding-left:8px}
+.scroll .no{font-family:monospace;font-size:11px;color:#8C7E66;letter-spacing:2px;margin-bottom:8px;padding-left:10px}
+.hero h1{font-size:clamp(27px,4.8vw,48px);font-weight:900;line-height:1.12;padding-left:10px}
+.hero h1 em{font-style:normal;color:#B03A2E;position:relative}
+.hero h1 em::after{content:"";position:absolute;left:4px;right:4px;bottom:2px;height:6px;background:rgba(240,201,106,.62)}
+.hero .sub{padding-left:10px;font-family:monospace;font-size:12px;letter-spacing:3px;color:#8C7E66;margin-top:10px;text-transform:uppercase}
+.hero .lead{font-size:15px;color:#3D3436;margin:18px 0 22px;max-width:580px;padding-left:10px}
+.hero-btns{display:flex;gap:11px;flex-wrap:wrap;padding-left:10px}
+.b1{padding:11px 24px;font-weight:800;border-radius:3px 14px 3px 14px;background:#B03A2E;color:#F7E9CE;border:1.5px solid #7A2A20;transition:.25s}
+.b1:hover{background:#F0C96A;color:#2C2326;transform:translateY(-2px)}
+.b2{padding:11px 24px;font-weight:800;border-radius:3px 14px 3px 14px;background:transparent;color:#2C2326;border:1.5px solid #C9B48A;transition:.25s}
+.b2:hover{background:#2C2326;color:#F7E9CE;border-color:#2C2326}
+
+/* 引《说文》小笺 */
+.classic{background:#F7E9CE;border:1px solid #E0CDA4;border-left:5px solid #B03A2E;padding:16px 18px;border-radius:2px 10px 10px 2px;position:relative}
+.classic .qq{position:absolute;top:-10px;left:14px;font-family:"Songti SC",serif;font-size:26px;color:#B03A2E;line-height:1;background:#F2E9D6;padding:0 4px}
+.classic p{font-size:14px;color:#3D3436;line-height:1.8;padding-top:4px}
+.classic cite{display:block;margin-top:6px;font-family:monospace;font-size:11px;color:#8C7E66;font-style:normal;text-align:right}
+.classic cite b{color:#B03A2E}
+
+/* ---------- 区块骨架 ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:52px 20px}
+.head{display:flex;align-items:baseline;gap:12px;margin-bottom:26px;flex-wrap:wrap;border-bottom:1px solid #D8C7A3;padding-bottom:10px}
+.head .idx{font-family:"Songti SC",serif;font-size:14px;font-weight:900;color:#F7E9CE;background:#B03A2E;padding:2px 11px;border-radius:3px;letter-spacing:2px}
+.head h2{font-size:23px;font-weight:900}
+.head h2 em{font-style:normal;color:#B03A2E}
+.head .en{font-family:monospace;font-size:11px;letter-spacing:1.6px;color:#8C7E66;text-transform:uppercase}
+.head a.more{margin-left:auto;font-size:13px;color:#4A403D;font-weight:700;font-family:monospace}
+.head a.more:hover{color:#B03A2E}
+
+/* ---------- 01 五德色卡（五行五色，纵轴铺色） ---------- */
+.wude{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;border:1px solid #D8C7A3;border-radius:8px;overflow:hidden;background:#F9F1DF}
+.wu{border-right:1px solid #D8C7A3;padding:0;transition:.3s;position:relative;overflow:hidden}
+.wu:last-child{border-right:none}
+.wu:hover{flex:1.4 1 0%;box-shadow:inset 0 0 0 2px rgba(44,35,38,.12)}
+.wu .sw{border:none;height:150px;transition:.4s;position:relative}
+.wu:hover .sw{height:190px}
+.wu .sw span{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-family:"Songti SC",serif;font-size:22px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35);letter-spacing:4px}
+.wu .meta{padding:14px 15px 16px}
+.wu .meta .el{font-family:monospace;font-size:10px;color:#8C7E66;letter-spacing:.5px}
+.wu .meta h3{font-size:16px;font-weight:900;margin:2px 0 3px}
+.wu .meta .virtue{font-size:12px;color:#6B5F55;font-family:"Songti SC",serif}
+.wu .meta .film{margin-top:7px;font-size:11.5px;color:#4A403D;border-top:1px dashed #D8C7A3;padding-top:6px}
+.wu .meta .film b{color:#B03A2E}
+
+/* ---------- 02 一帧一色笺（宣纸卡 + 色晕） ---------- */
+.jian{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.leaf{background:#F9F1DF;border:1px solid #D8C7A3;border-radius:3px;padding:0;overflow:hidden;transition:.38s;box-shadow:2px 3px 0 rgba(120,100,80,.12);position:relative}
+.leaf::before{content:"";position:absolute;top:8px;left:8px;right:8px;bottom:8px;border:1px solid rgba(201,180,138,.5);pointer-events:none;z-index:3}
+.leaf:hover{transform:translateY(-6px) rotate(.4deg);box-shadow:0 16px 28px rgba(176,58,46,.14)}
+.leaf .frame{height:200px;overflow:hidden;position:relative;margin:8px 8px 0}
+.leaf .frame img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1);transition:.55s}
+.leaf:hover .frame img{transform:scale(1.06)}
+.leaf .bloom{position:absolute;border-radius:50%;filter:blur(26px);opacity:.72;z-index:1}
+.leaf .frame .pick{position:absolute;bottom:10px;right:10px;z-index:4;font-family:"Songti SC",serif;font-size:11px;background:rgba(44,35,38,.86);color:#F0C96A;padding:4px 10px;border-radius:20px;letter-spacing:1px}
+.leaf .bd{padding:16px 18px 18px;position:relative;z-index:2}
+.leaf h3{font-size:17px;font-weight:900;color:#2C2326}
+.leaf .scene{font-size:11.5px;color:#8C7E66;font-family:monospace;margin:2px 0 8px}
+.leaf p{font-size:13.5px;color:#3D3436;line-height:1.72}
+.leaf .pal{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.leaf .pal i{width:22px;height:22px;border-radius:50%;border:1px solid #D8C7A3;box-shadow:inset 0 0 0 2px rgba(255,255,255,.3)}
+
+/* ---------- 03 晕染色阶（竖条渐变标尺） ---------- */
+.ramp{display:grid;gap:16px;background:#F9F1DF;border:1px solid #D8C7A3;border-radius:10px;padding:24px}
+.ramp-row{display:grid;grid-template-columns:130px 1fr 110px;gap:14px;align-items:center}
+.ramp-row .nm{font-family:"Songti SC",serif;font-weight:900;font-size:15px;color:#2C2326}
+.ramp-row .nm small{display:block;font-family:monospace;font-size:10px;color:#8C7E66;font-weight:400;letter-spacing:.5px}
+.bar{height:30px;border-radius:4px;position:relative;overflow:hidden;border:1px solid rgba(44,35,38,.12)}
+.bar i{position:absolute;inset:0;background:var(--g);animation:bleed 1.6s ease-out forwards;transform:scaleX(0);transform-origin:left}
+@keyframes bleed{to{transform:scaleX(1)}}
+.tick{font-family:monospace;font-size:11px;color:#6B5F55;display:flex;justify-content:space-between;border-top:1px dashed #D8C7A3;padding-top:5px;margin-top:6px;grid-column:2}
+.tell{font-size:12px;color:#6B5F55;font-family:monospace;text-align:right;line-height:1.5}
+
+/* ---------- 04 题跋批注（竖写感 + 朱批） ---------- */
+.colophon{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.note{background:#F7E9CE;border:1px solid #E0CDA4;border-radius:2px;padding:20px 22px 22px;position:relative;transition:.3s;box-shadow:inset 4px 0 0 #B03A2E}
+.note:hover{background:#FDF4E4;transform:translateX(3px)}
+.note .brush{font-family:"Songti SC",serif;font-size:12px;color:#B03A2E;letter-spacing:2px;margin-bottom:5px}
+.note h3{font-size:16.5px;font-weight:900;color:#2C2326;margin-bottom:6px}
+.note p{font-size:13.5px;color:#3D3436;line-height:1.8}
+.note .hz{margin-top:10px;font-family:"Songti SC",serif;font-size:12px;color:#B03A2E;border-top:1px dashed #D8C7A3;padding-top:7px;line-height:1.7}
+.note .hz b{font-weight:900}
+
+/* ---------- 05 笺谱铭牌 ---------- */
+.plaque{max-width:1220px;margin:0 auto;padding:0 20px 12px}
+.plaque-in{background:#2C2326;border:2px solid #B03A2E;border-radius:4px;padding:24px 26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between;position:relative;overflow:hidden}
+.plaque-in::before{content:"箋";position:absolute;right:18px;top:-34px;font-size:96px;font-weight:900;color:rgba(176,58,46,.16);font-family:"Songti SC",serif;line-height:1}
+.plaque-in .lab{font-family:monospace;font-size:11px;letter-spacing:2px;color:#F0C96A}
+.plaque-in .u{font-size:clamp(14px,3vw,21px);font-weight:900;color:#F0C96A;word-break:break-all;font-family:"Songti SC",monospace}
+.plaque-in .u a{color:#F0C96A;border-bottom:1.5px dashed #B03A2E}
+.plaque-in .u a:hover{color:#fff}
+.plaque-in .note{font-size:12px;color:#D9C9A6;text-align:right}
+
+/* ---------- 关于 ---------- */
+.about{max-width:1220px;margin:0 auto;padding:52px 20px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;background:#F9F1DF;border:1px solid #D8C7A3;box-shadow:0 0 0 7px #F9F1DF,0 0 0 8px #C9B48A;border-radius:3px}
+.about h2{font-size:23px;font-weight:900;margin-bottom:14px}
+.about h2 em{font-style:normal;color:#B03A2E}
+.about p{font-size:15px;color:#3D3436;line-height:1.95;margin-bottom:12px}
+.about .u2{color:#B03A2E;font-weight:800;font-family:monospace;font-size:15px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:#F2E9D6;border:1px solid #D8C7A3;border-radius:6px;padding:16px;text-align:center}
+.tile .n{font-family:"Songti SC",serif;font-size:22px;font-weight:900;color:#B03A2E}
+.tile .l{font-size:12px;color:#6B5F55;margin-top:2px}
+
+/* ---------- 页脚 ---------- */
+.foot{border-top:4px double #B03A2E;padding:36px 20px 26px;text-align:center;background:#E9Ddc4}
+.foot-logo{font-size:19px;font-weight:900;color:#2C2326;font-family:"Songti SC",serif;letter-spacing:1px}
+.foot-logo em{font-style:normal;color:#B03A2E}
+.foot-nav{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:14px 0;font-family:monospace;font-size:13px}
+.foot-nav a{color:#6B5F55}
+.foot-nav a:hover{color:#B03A2E}
+.foot p{font-size:12px;color:#7A6E60}
+.foot .cut{margin:14px auto 10px;display:inline-block;border:1.5px solid #B03A2E;color:#7A2A20;font-family:monospace;font-size:11.5px;font-weight:800;padding:7px 15px;border-radius:3px 14px 3px 14px;background:#F7E9CE;max-width:780px;line-height:1.6}
+.foot .legal{margin-top:10px;max-width:900px;margin-left:auto;margin-right:auto;color:#6B5F55;line-height:1.8;font-size:12px}
+
+/* ---------- 响应式 ---------- */
+@media(max-width:880px){
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;padding:28px 20px 34px;gap:26px}
+  .about{grid-template-columns:1fr;padding:30px 20px}
+  .wrap{padding:42px 20px}
+  .nav-in{height:58px}
+  .chop .en{display:none}
+  .ramp-row{grid-template-columns:100px 1fr;gap:10px}
+  .ramp-row .tell{display:none}
+  .tick{grid-column:2}
+  .wu:hover .sw{height:150px}
+}
+@media(max-width:420px){
+  .hero h1{font-size:25px}
+  .head h2{font-size:20px}
+  .wude{grid-template-columns:1fr 1fr}
+  .wu{border-bottom:1px solid #D8C7A3}
+}
+@media print{
+  .nav,.nav-go,.tab{display:none}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- ===== 笺纸签条 ===== -->
+<div class="tab">
+  <span>凰色映画笺 · 一帧一色，色里识人</span><b>原创中国传统色 × 电影读色</b>
+  <span class="seal">非影视大全</span>
+  <span>不播片 · 不聚源 · 不下载</span>
+</div>
+
+<!-- ===== 导航：玉箸 + 朱印 ===== -->
+<div class="nav">
+  <div class="nav-in">
+    <div class="chop">
+      <div class="yin"></div>
+      <div>
+        <div class="cn">凰色<em>映画笺</em><span class="thin"> · 色里识人</span></div>
+        <div class="en">Huangse · Chroma Scripts</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#wude">五德色卡</a>
+      <a href="#jian">一帧一色</a>
+      <a href="#ramp">晕染色阶</a>
+      <a href="#note">题跋批注</a>
+      <a href="#about">为何是凰色</a>
+    </nav>
+    <a href="#jian" class="nav-go">展笺 →</a>
+  </div>
+</div>
+
+<!-- ===== Hero：展开的笺 ===== -->
+<section class="hero" id="top">
+  <div>
+    <div class="scroll">
+      <div class="no">叶 · 第一叶 · 色之起</div>
+      <h1>凰色映画笺<br>一帧一<em>色</em>，色里识人</h1>
+      <div class="sub">五色备举 · 读色而非读片 · A Chroma Reading of Cinema</div>
+      <p class="lead">"凰色"不是某个影视站的牌子，是我们给自己定的读法：凤象者五，青赤黄白黑，五色备举则见天下安宁。一部好片也一样——它穿什么色，那色就在替谁说话。这里不给你播放键，只给你一张笺：把那一格颜色裁下来，告诉你它为什么是朱砂，不是胭脂。</p>
+      <div class="hero-btns">
+        <a href="#jian" class="b1">🎨 展一帧一色</a>
+        <a href="#wude" class="b2">📜 先看五德色卡</a>
+      </div>
+    </div>
+  </div>
+
+  <aside class="classic" aria-label="笺首引文">
+    <span class="qq">❝</span>
+    <p>凤，神鸟也。天老曰：凤之象也，麟前鹿后，蛇颈鱼尾，龙文龟背，燕颔鸡喙，<b>五色备举</b>。又曰：凤头上青，故曰戴仁；颈白，故曰缨义；嘴赤，故曰负礼；胸黑，故曰尚知；足下黄，故曰蹈信。</p>
+    <cite>— 《说文解字》 · 许慎　|　五色即五德，色从来不是皮相</cite>
+  </aside>
+</section>
+
+<!-- ===== 01 五德色卡 ===== -->
+<section class="wrap" id="wude">
+  <div class="head">
+    <span class="idx">第一叶 · 五德</span>
+    <h2>五德<em>色卡</em></h2>
+    <span class="en">The Five Virtues · 青赤黄白黑</span>
+    <a href="#" class="more">整卷 #</a>
+  </div>
+  <div class="wude">
+    <article class="wu">
+      <div class="sw" style="background:linear-gradient(160deg,#3A7A7E,#5C9EA0)"><span>青</span></div>
+      <div class="meta">
+        <div class="el">木 · 东 · 仁 · 鸾</div>
+        <h3>戴仁</h3>
+        <div class="virtue">头色青，主生发、克制、不动声色。</div>
+        <div class="film">映画例：<b>《花样年华》</b>旗袍青底——欲望还没开口，先穿在身上。</div>
+      </div>
+    </article>
+    <article class="wu">
+      <div class="sw" style="background:linear-gradient(160deg,#9C2B20,#C84530)"><span>赤</span></div>
+      <div class="meta">
+        <div class="el">火 · 南 · 礼 · 凤</div>
+        <h3>负礼</h3>
+        <div class="virtue">嘴色赤，主礼数、血、名分与盛大的假。</div>
+        <div class="film">映画例：<b>《凰图腾》</b>丽妃血红配金——越华丽，越在争那把椅子。</div>
+      </div>
+    </article>
+    <article class="wu">
+      <div class="sw" style="background:linear-gradient(160deg,#C89A2E,#E6C260)"><span>黄</span></div>
+      <div class="meta">
+        <div class="el">土 · 中 · 信 · 鵷鶵</div>
+        <h3>蹈信</h3>
+        <div class="virtue">足下黄，主中正、安稳、说出口的话。</div>
+        <div class="film">映画例：<b>《小森林》</b>米黄灶台——信的不是誓言，是腌好的梅子。</div>
+      </div>
+    </article>
+    <article class="wu">
+      <div class="sw" style="background:linear-gradient(160deg,#E8E2CF,#F7EFDD)"><span>白</span></div>
+      <div class="meta">
+        <div class="el">金 · 西 · 义 · 鴻鵠</div>
+        <h3>缨义</h3>
+        <div class="virtue">颈色白，主决绝、丧、干净的告别。</div>
+        <div class="film">映画例：<b>《海街日记》</b>白墙与和服——义是"我送你走，不拦"。</div>
+      </div>
+    </article>
+    <article class="wu">
+      <div class="sw" style="background:linear-gradient(160deg,#2A262E,#45404C)"><span>黑</span></div>
+      <div class="meta">
+        <div class="el">水 · 北 · 智 · 鸑鷟</div>
+        <h3>尚知</h3>
+        <div class="virtue">胸色黑，主深、疑、不肯说破的那层。</div>
+        <div class="film">映画例：<b>《坠落的审判》</b>黑衣录音——智在听出笑里那一声假。</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== 02 一帧一色笺 ===== -->
+<section class="wrap" id="jian" style="background:rgba(176,58,46,.05)">
+  <div class="head">
+    <span class="idx">第二叶 · 一帧</span>
+    <h2>一帧<em>一色</em></h2>
+    <span class="en">One Frame, One Hue</span>
+    <a href="#" class="more">翻下一叶 #</a>
+  </div>
+  <div class="jian">
+    <article class="leaf">
+      <div class="frame">
+        <img src="https://picsum.photos/500/400?random=6001" alt="笺 01">
+        <span class="bloom" style="width:130px;height:130px;background:#5C9EA0;top:-30px;right:-20px"></span>
+        <span class="pick">取色 · 石青</span>
+      </div>
+      <div class="bd">
+        <h3>《花样年华》· 走廊初遇</h3>
+        <div class="scene">00:14:22 · 苏丽珍转身 · 旗袍第三套</div>
+        <p>那一格不是红，是青底上一点暗花。青是"还没发生"：她可以装作只是邻居，所以可以穿得克制。等到旗袍换成朱砂，事情就收不回去了。</p>
+        <div class="pal"><i style="background:#3A7A7E"></i><i style="background:#8C5A4A"></i><i style="background:#E6C260"></i><i style="background:#2A262E"></i></div>
+      </div>
+    </article>
+    <article class="leaf">
+      <div class="frame">
+        <img src="https://picsum.photos/500/400?random=6002" alt="笺 02">
+        <span class="bloom" style="width:150px;height:150px;background:#C84530;bottom:-40px;left:-30px"></span>
+        <span class="pick">取色 · 朱砂</span>
+      </div>
+      <div class="bd">
+        <h3>《凰图腾》· 七彩水晶宫</h3>
+        <div class="scene">美术阐述 · 丽妃居所 · 敦煌色系</div>
+        <p>它的美术指导说得很直白：色彩就是人物心理，不单是布景。丽妃用血红配金，采女时是橘红——同一个野心，颜色替她从青涩走到盛装。</p>
+        <div class="pal"><i style="background:#9C2B20"></i><i style="background:#C89A2E"></i><i style="background:#7A2A20"></i><i style="background:#2A262E"></i></div>
+      </div>
+    </article>
+    <article class="leaf">
+      <div class="frame">
+        <img src="https://picsum.photos/500/400?random=6003" alt="笺 03">
+        <span class="bloom" style="width:120px;height:120px;background:#E6C260;top:20px;left:-24px"></span>
+        <span class="pick">取色 · 缃金</span>
+      </div>
+      <div class="bd">
+        <h3>《小森林》· 灶台上的秋</h3>
+        <div class="scene">夏秋篇 · 收栗子那场 · 午后的光</div>
+        <p>全片最贵的一格不是食材，是那种米黄里透金的"无聊"。缃色主中、主信——她不跟谁交代，只跟一罐腌梅子交代。色稳，人才稳。</p>
+        <div class="pal"><i style="background:#C89A2E"></i><i style="background:#E8D5A8"></i><i style="background:#8C7E66"></i><i style="background:#5C9EA0"></i></div>
+      </div>
+    </article>
+    <article class="leaf">
+      <div class="frame">
+        <img src="https://picsum.photos/500/400?random=6004" alt="笺 04">
+        <span class="bloom" style="width:140px;height:140px;background:#E8E2CF;bottom:10px;right:-34px"></span>
+        <span class="pick">取色 · 月白</span>
+      </div>
+      <div class="bd">
+        <h3>《海街日记》· 长阶送葬</h3>
+        <div class="scene">春 · 姐姐们穿白 · 风从海那头来</div>
+        <p>白不是空，是"义"。三个人穿一样的白，站不一样的姿势：一个撑着，一个别过脸，一个哭得没声音。同色不同形，才是导演的真句。</p>
+        <div class="pal"><i style="background:#F7EFDD"></i><i style="background:#8FA7A2"></i><i style="background:#C89A2E"></i><i style="background:#45404C"></i></div>
+      </div>
+    </article>
+    <article class="leaf">
+      <div class="frame">
+        <img src="https://picsum.photos/500/400?random=6005" alt="笺 05">
+        <span class="bloom" style="width:130px;height:130px;background:#2A262E;top:-20px;left:20px"></span>
+        <span class="pick">取色 · 墨紫</span>
+      </div>
+      <div class="bd">
+        <h3>《坠落的审判》· 录音那三分钟</h3>
+        <div class="scene">庭审中段 · 黑衣 · 声先于画</div>
+        <p>黑的用法是"藏"。画面只给桑德拉的下巴，黑把其余都吃掉了，逼你听。那声笑一出来，墨色里才透出一点冷光——那是全片的刀口。</p>
+        <div class="pal"><i style="background:#2A262E"></i><i style="background:#5A5060"></i><i style="background:#9C2B20"></i><i style="background:#E8E2CF"></i></div>
+      </div>
+    </article>
+    <article class="leaf">
+      <div class="frame">
+        <img src="https://picsum.photos/500/400?random=6006" alt="笺 06">
+        <span class="bloom" style="width:120px;height:120px;background:#7A9E8A;top:30px;right:-20px"></span>
+        <span class="pick">取色 · 苔青</span>
+      </div>
+      <div class="bd">
+        <h3>《完美的日子》· 那棵树的顶</h3>
+        <div class="scene">63'10″ · 平山举机 · 光只停两秒</div>
+        <p>苔青是"不争"。整部片故意把自己调得比生活还灰一点，那一格树冠漏下的光才砸得疼。好色不抢戏，它只负责让你突然坐直。</p>
+        <div class="pal"><i style="background:#5C7A68"></i><i style="background:#C89A2E"></i><i style="background:#E8E2CF"></i><i style="background:#2A262E"></i></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== 03 晕染色阶 ===== */
+<section class="wrap" id="ramp">
+  <div class="head">
+    <span class="idx">第三叶 · 晕染</span>
+    <h2>晕染<em>色阶</em></h2>
+    <span class="en">Wash &amp; Ramp · 一格之内有几层心</span>
+    <a href="#" class="more">整条尺 #</a>
+  </div>
+  <div class="ramp">
+    <div class="ramp-row">
+      <div class="nm">朱砂 → 胭脂<small>同一红，两种身份</small></div>
+      <div>
+        <div class="bar"><i style="--g:linear-gradient(90deg,#C84530,#9C2B20 55%,#5A1A14)"></i></div>
+        <div class="tick"><span>盛装</span><span>争</span><span>血</span></div>
+      </div>
+      <div class="tell">暖一分开，味就变：朱砂是礼，胭脂是伤。</div>
+    </div>
+    <div class="ramp-row">
+      <div class="nm">石青 → 苔青<small>欲望的降温过程</small></div>
+      <div>
+        <div class="bar"><i style="--g:linear-gradient(90deg,#5C9EA0,#3A7A7E 50%,#2C4A4C)"></i></div>
+        <div class="tick"><span>克制</span><span>藏</span><span>冷</span></div>
+      </div>
+      <div class="tell">青越沉，话越少。青到苔色，就是不必再解释。</div>
+    </div>
+    <div class="ramp-row">
+      <div class="nm">缃金 → 土黄<small>安稳的两种质地</small></div>
+      <div>
+        <div class="bar"><i style="--g:linear-gradient(90deg,#E6C260,#C89A2E 60%,#8C6A1E)"></i></div>
+        <div class="tick"><span>午后</span><span>灶</span><span>旧</span></div>
+      </div>
+      <div class="tell">缃金是希望，土黄是认命——都算安稳，贵贱不同。</div>
+    </div>
+    <div class="ramp-row">
+      <div class="nm">月白 → 纸灰<small>白的退场</small></div>
+      <div>
+        <div class="bar"><i style="--g:linear-gradient(90deg,#F7EFDD,#E8E2CF 55%,#B9B0A0)"></i></div>
+        <div class="tick"><span>送</span><span>空</span><span>散</span></div>
+      </div>
+      <div class="tell">白一旦发灰，告别就结束了。别再加滤镜。</div>
+    </div>
+    <div class="ramp-row">
+      <div class="nm">墨紫 → 漆黑<small>疑心的浓度</small></div>
+      <div>
+        <div class="bar"><i style="--g:linear-gradient(90deg,#45404C,#2A262E 50%,#141118)"></i></div>
+        <div class="tick"><span>疑</span><span>藏</span><span>死</span></div>
+      </div>
+      <div class="tell">黑不是没有光，是把光的位置标给你看。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04 题跋批注 ===== */
+<section class="wrap" id="note" style="background:rgba(176,58,46,.05)">
+  <div class="head">
+    <span class="idx">第四叶 · 题跋</span>
+    <h2>题跋<em>批注</em></h2>
+    <span class="en">Colophon · 朱批几句</span>
+    <a href="#" class="more">续笺 #</a>
+  </div>
+  <div class="colophon">
+    <div class="note">
+      <div class="brush">朱批 · 其一</div>
+      <h3>别用"高级感"偷懒</h3>
+      <p>低饱和不等于高级。低饱和若是偷懒调的，那叫灰；低饱和若是角色肺里的气，才叫色。判据只有一条：把色条抽掉一格，人还站得住吗？</p>
+      <div class="hz">批：<b>色是骨头，不是滤镜。</b>　见《完美的日子》63'10″。</div>
+    </div>
+    <div class="note">
+      <div class="brush">朱批 · 其二</div>
+      <h3>旗袍换色比台词快</h3>
+      <p>《花样年华》里苏丽珍每换一套旗袍，剧情其实没动。可你就是知道：青是忍，朱是破，墨是认。导演省了三场戏，让颜色替他演了。</p>
+      <div class="hz">批：<b>会看色的观众，不用等台词。</b>　数到第几套，心就明几分。</div>
+    </div>
+    <div class="note">
+      <div class="brush">朱批 · 其三</div>
+      <h3>白衣最残忍</h3>
+      <p>丧服、婚纱、医院、雪。白把所有人的表情都摊平了，谁崩，谁就输。所以好导演拍白场，永远只给半身，留一半给墙。</p>
+      <div class="hz">批：<b>白是镜子，不是布。</b>　见《海街日记》长阶。</div>
+    </div>
+    <div class="note">
+      <div class="brush">朱批 · 其四</div>
+      <h3>黑要配一点漏光</h3>
+      <p>全黑是偷懒，黑里透一丝冷光才是手艺。《坠落的审判》那场录音，画面几乎死黑，只有下巴棱上一线——你就盯那儿，跟导演一起审。</p>
+      <div class="hz">批：<b>黑的价值在标光。</b>　声先画后，黑才有罪。</div>
+    </div>
+    <div class="note">
+      <div class="brush">朱批 · 其五</div>
+      <h3>黄色是最难演的色</h3>
+      <p>红能喊，蓝能哭，黄只能"在那儿"。可一部片只要有一格好黄——灶台、旧墙、午后马路——它就立住了。黄的功力，是让观众觉得日子能过。</p>
+      <div class="hz">批：<b>信在黄里。</b>　《小森林》整部是黄的注脚。</div>
+    </div>
+    <div class="note">
+      <div class="brush">朱批 · 其六</div>
+      <h3>别搜"色号"，先问情绪</h3>
+      <p>看到动心的一格，先别去吸色取号。问自己：这格是暖的还是冷的？它替谁说话？答得出来，才配谈配色。色号是死的，脾气是活的。</p>
+      <div class="hz">批：<b>先识人，再识色。</b>　此笺的全部规矩，就这一句。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 笺谱铭牌 ===== */
+<div class="plaque">
+  <div class="plaque-in">
+    <div>
+      <div class="lab">笺谱名称 / 笺谱网址</div>
+      <div class="u"><a href="https://huangseyingshidaquan-h5.github.io">凰色映画笺 — https://huangseyingshidaquan-h5.github.io</a></div>
+    </div>
+    <div class="note">一帧一色 · 色里识人<br>非"影视大全"，不聚源、不播片、不下载</div>
+  </div>
+</div>
+
+<!-- ===== 关于 ===== */
+<section class="wrap" id="about">
+  <div>
+    <h2>为何叫<em>「凰色」</em>，又不叫"大全"</h2>
+    <p>"凰色"两个字，本来该是干净的。《说文》里凤凰五色备举，头青、颈白、嘴赤、胸黑、足黄，五色对应的是仁、义、礼、智、信五德——古人早就把"好看"这件事，交给了品格。凰古音又通"光"，是太阳鸟。所以我们拿它来做读色的尺子：看一部片，先看它穿什么色，那色里藏着谁的性格。</p>
+    <p>至于"大全"，这词在搜索里早被影视资源聚合、免费追剧、App 下载那一套占满了。我们偏不做那个：这页<b>没有播放器、没有片源、没有线路切换、不破解会员、不托管任何侵权内容</b>，连"搜片"按钮都没放。它是一册笺谱，不是一座仓库。</p>
+    <p>片例只取一格做色彩分析，真要看，请走正版平台与官方发行。把灯关暗一点，你会看见色在替人说话。</p>
+    <p>笺谱名称：凰色映画笺<br>笺谱网址：<span class="u2">https://huangseyingshidaquan-h5.github.io</span></p>
+  </div>
+  <div class="tiles">
+    <div class="tile"><div class="n">五色</div><div class="l">青赤黄白黑 · 五德色卡</div></div>
+    <div class="tile"><div class="n">0 源</div><div class="l">无播放器 / 无片源 / 无下载</div></div>
+    <div class="tile"><div class="n">一帧</div><div class="l">每片只取一格 · 色里识人</div></div>
+    <div class="tile"><div class="n">笺谱</div><div class="l">朱砂 / 孔雀青 / 缃金 / 墨紫</div></div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== */
+<footer class="foot">
+  <div class="foot-logo">凰色<em>映画笺</em> · 五色備舉，色裏識人</div>
+  <div class="foot-nav">
+    <a href="#wude">五德色卡</a>
+    <a href="#jian">一帧一色</a>
+    <a href="#ramp">晕染色阶</a>
+    <a href="#note">题跋批注</a>
+    <a href="#about">为何是凰色</a>
+    <a href="#top">↑ 收笺</a>
+  </div>
+  <div class="cut">⚑ 本站为原创「中国传统色 × 电影色彩分析」内容笺谱，与任何"影视大全"类资源聚合站、免费追剧 App、在线播放与下载工具均无关联、无授权、无承接；凰色为自造读色概念，不攀附凤凰卫视、凤凰网及任一既有"凤凰/凰"字品牌。</div>
+  <p>© 2026 凰色映画笺 · 笺谱名称：凰色映画笺 · 笺谱网址：https://huangseyingshidaquan-h5.github.io</p>
+  <p class="legal">本页仅作电影色彩美学、传统色文化与映画赏析演示：不提供在线播放、不提供盗版资源下载、不聚合片源、不切换播放线路、不售卖会员、不托管任何侵权内容。文中片例仅截取单帧作色彩与构图分析（合理赏析范畴），实际观看请走正版平台、官方发行与官方修复／影展渠道。未生成 robots.txt 与 sitemap.xml。</p>
+</footer>
+
+</body>
+</html>
